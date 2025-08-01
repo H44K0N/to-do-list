@@ -1,0 +1,75 @@
+@keyframes strike @keyframes strike @keyframes strike {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-1px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+.task {
+  background-color: #1e1f25;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #e0f2ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.2s ease, opacity 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.done {
+  opacity: 0.5;
+  animation: vibrate 0.3s ease;
+}
+
+.strikeThrough {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  background-color: #e0f2ff;
+  width: 100%;
+  pointer-events: none;
+  animation: strike 0.4s ease-out forwards;
+}
+
+.text h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.text p {
+  margin: 0.3rem 0 0;
+}
+
+.actions button {
+  margin-left: 0.5rem;
+  background: none;
+  border: 1px solid #444;
+  color: #e0f2ff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actions button:hover {
+  background-color: #e0f2ff;
+  color: #1e1f25;
+}
+

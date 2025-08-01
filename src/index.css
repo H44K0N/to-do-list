@@ -1,0 +1,18 @@
+:root {
+  --font-family-ui: 'Rajdhani', sans-serif;
+  --text-transform-ui: uppercase;
+  --letter-spacing-ui: 1px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  font-family: var(--font-family-ui);
+  text-transform: var(--text-transform-ui);
+  letter-spacing: var(--letter-spacing-ui);
+  color: #e0f2ff;
+  background-color: #0d0f15;
+}
+

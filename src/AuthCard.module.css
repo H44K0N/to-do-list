@@ -1,0 +1,65 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 2rem;
+}
+
+.title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #e0f2ff;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.letter {
+  display: inline-block;
+  margin: 0 1.5px;
+  color: inherit;
+}
+
+.scene {
+  width: 90vw;
+  max-width: 400px;
+  height: auto;
+  perspective: 1000px;
+  margin: 2rem auto;
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 4 / 4.5; /* Responsive height */
+  position: relative;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  background-color: #1e1f25;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
