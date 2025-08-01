@@ -19,8 +19,6 @@ interface Props {
 }
 
 export default function TaskItem({ task, onUpdated, onDeleted, index }: Props) {
-  const taskId = task.id || task.tempId
-
   const toggleDone = async () => {
     if (!task.id) return
 
@@ -42,10 +40,7 @@ export default function TaskItem({ task, onUpdated, onDeleted, index }: Props) {
   const deleteTask = async () => {
     if (!task.id) return
 
-    const { error } = await supabase
-      .from('tasks')
-      .delete()
-      .eq('id', task.id)
+    const { error } = await supabase.from('tasks').delete().eq('id', task.id)
 
     if (error) {
       alert('Failed to delete task')
