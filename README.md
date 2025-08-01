@@ -1,69 +1,117 @@
-# React + TypeScript + Vite
+# Space-Themed To-Do List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, responsive task manager with a clean futuristic UI. Built to explore optimistic UI updates, subtle animations, and full-stack integration with authentication and database.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✦ Motivation
 
-## Expanding the ESLint configuration
+This project was created to strengthen my skills in building full-stack applications with a focus on user experience. I wanted it to feel instant and smooth — both visually and functionally — while handling real-time data, authentication, and animation challenges.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✦ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Frontend**: React, TypeScript, Vite, CSS Modules, Framer Motion  
+- **Backend**: Supabase (PostgreSQL, Auth, REST API)  
+- **Other**: UUID (for optimistic updates), RLS (row-level security for data isolation)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ✦ Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Login & Register (with Supabase Auth)  
+- Add, complete, and delete tasks  
+- Optimistic UI: instant local feedback on task creation  
+- Animated task transitions (entry, completion, and deletion)  
+- Vibrating strike-through for marking tasks as done  
+- Per-user task visibility (thanks to RLS)  
+- Clean dark mode with glow effects for that space vibe
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## ✦ Challenges & Solutions
+
+**✅ Optimistic UI Handling**  
+When a task is added, it appears instantly with a temporary ID. Once Supabase responds, the task is updated. If the request fails, it's removed and the user is notified.
+
+**✅ Visual Feedback**  
+Completion triggers a glowing strike-through line, soft fade-out, and a slight vibration to give the user clear, satisfying feedback.
+
+**✅ Data Access Control**  
+Supabase RLS policies ensure each user can only access their own tasks — enforced both in the frontend and database.
+
+**✅ Animation Syncing**  
+Animations are consistent for both optimistic and confirmed tasks, preventing confusion or visual "glitches."
+
+---
+
+## ✦ Possible Improvements
+
+- Grouping tasks by tag or project  
+- Drag-and-drop task reordering  
+- Light/dark theme toggle  
+- Offline cache or syncing
+
+---
+
+**Built by [H44K0N](https://github.com/H44K0N) – 2025**
+# Space-Themed To-Do List
+
+A fast, responsive task manager with a clean futuristic UI. Built to explore optimistic UI updates, subtle animations, and full-stack integration with authentication and database.
+
+---
+
+## ✦ Motivation
+
+This project was created to strengthen my skills in building full-stack applications with a focus on user experience. I wanted it to feel instant and smooth — both visually and functionally — while handling real-time data, authentication, and animation challenges.
+
+---
+
+## ✦ Tech Stack
+
+- **Frontend**: React, TypeScript, Vite, CSS Modules, Framer Motion  
+- **Backend**: Supabase (PostgreSQL, Auth, REST API)  
+- **Other**: UUID (for optimistic updates), RLS (row-level security for data isolation)
+
+---
+
+## ✦ Features
+
+- Login & Register (with Supabase Auth)  
+- Add, complete, and delete tasks  
+- Optimistic UI: instant local feedback on task creation  
+- Animated task transitions (entry, completion, and deletion)  
+- Vibrating strike-through for marking tasks as done  
+- Per-user task visibility (thanks to RLS)  
+- Clean dark mode with glow effects for that space vibe
+
+---
+
+## ✦ Challenges & Solutions
+
+**✅ Optimistic UI Handling**  
+When a task is added, it appears instantly with a temporary ID. Once Supabase responds, the task is updated. If the request fails, it's removed and the user is notified.
+
+**✅ Visual Feedback**  
+Completion triggers a glowing strike-through line, soft fade-out, and a slight vibration to give the user clear, satisfying feedback.
+
+**✅ Data Access Control**  
+Supabase RLS policies ensure each user can only access their own tasks — enforced both in the frontend and database.
+
+**✅ Animation Syncing**  
+Animations are consistent for both optimistic and confirmed tasks, preventing confusion or visual "glitches."
+
+---
+
+## ✦ Possible Improvements
+
+- Grouping tasks by tag or project  
+- Drag-and-drop task reordering  
+- Light/dark theme toggle  
+- Offline cache or syncing
+
+---
+
+**Built by [H44K0N](https://github.com/H44K0N) – 2025**
+
