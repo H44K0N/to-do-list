@@ -15,11 +15,11 @@ export default function TaskList({
   setTasks,
 }: {
   tasks: Task[]
-  setTasks: (tasks: Task[]) => void
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }) {
   const handleUpdate = (updatedTask: Task) => {
     setTasks((prev: Task[]) =>
-      prev.map((task: Task) =>
+      prev.map((task) =>
         task.id === updatedTask.id || task.tempId === updatedTask.tempId
           ? updatedTask
           : task
@@ -29,7 +29,7 @@ export default function TaskList({
 
   const handleDelete = (id: string) => {
     setTasks((prev: Task[]) =>
-      prev.filter((task: Task) => task.id !== id && task.tempId !== id)
+      prev.filter((task) => task.id !== id && task.tempId !== id)
     )
   }
 
@@ -47,4 +47,3 @@ export default function TaskList({
     </div>
   )
 }
-

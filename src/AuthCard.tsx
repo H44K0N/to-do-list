@@ -2,33 +2,16 @@ import { useState, useEffect } from 'react'
 import styles from './AuthCard.module.css'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 
 const title = 'Hypertask'
 
-export default function AuthCard() {
-  const [isFlipped, setIsFlipped] = useState(false)
-  const [animateWave, setAnimateWave] = useState(false)
-
-  useEffect(() => {
-    const trigger = () => {
-      setAnimateWave(true)
-      setTimeout(() => setAnimateWave(false), 1000)
-    }
-
-    trigger()
-    const interval = setInterval(trigger, 8000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const letterVariants = {
-    initial: {
-      scale: 1,
-      textShadow: '0 0 0px #00c6ff',
-    },
-  }
-
-  const getAnimateVariant = (i: number) => ({
+const letterVariants: Variants = {
+  initial: {
+    scale: 1,
+    textShadow: '0 0 0px #00c6ff',
+  },
+  wave: {
     scale: [1, 1.1, 1],
     textShadow: [
       '0 0 0px #00c6ff',
@@ -36,11 +19,26 @@ export default function AuthCard() {
       '0 0 0px #00c6ff',
     ],
     transition: {
-      delay: i * 0.02,
       duration: 0.4,
-      ease: [0.42, 0, 0.58, 1],
+      ease: 'easeInOut',
     },
-  })
+  },
+}
+
+export default function AuthCard() {
+  const [isFlipped, setIsFlipped] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  useEffect(() => {
+    const trigger = () => {
+      setActiveIndex(0)
+    }
+
+    trigger() // initial wave
+    const interval = setInterval(trigger, 8000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className={styles.wrapper}>
@@ -48,10 +46,12 @@ export default function AuthCard() {
         {title.split('').map((char, i) => (
           <motion.span
             key={i}
-            custom={i}
-            initial="initial"
-            animate={animateWave ? getAnimateVariant(i) : 'initial'}
             variants={letterVariants}
+            initial="initial"
+            animate={activeIndex === i ? 'wave' : 'initial'}
+            onAnimationComplete={() => {
+              if (activeIndex === i) setActiveIndex(i + 1 < title.length ? i + 1 : null)
+            }}
             className={styles.letter}
           >
             {char}
@@ -71,4 +71,3 @@ export default function AuthCard() {
     </div>
   )
 }
-
