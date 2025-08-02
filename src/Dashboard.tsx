@@ -12,7 +12,7 @@ export default function Dashboard() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('tasks')
         .select('*')
         .eq('user_id', user.id)
@@ -25,7 +25,7 @@ export default function Dashboard() {
   }, [])
 
   const handleOptimisticAdd = (task: any) => {
-    setTasks(prev => [task, ...prev])
+    setTasks((prev: any[]) => [task, ...prev])
   }
 
   const handleConfirmed = async (tempId: string) => {
@@ -36,14 +36,14 @@ export default function Dashboard() {
       .single()
 
     if (data) {
-      setTasks(prev =>
+      setTasks((prev: any[]) =>
         prev.map(t => (t.tempId === tempId ? data : t))
       )
     }
   }
 
   const handleFail = (tempId: string) => {
-    setTasks(prev => prev.filter(t => t.tempId !== tempId))
+    setTasks((prev: any[]) => prev.filter(t => t.tempId !== tempId))
   }
 
   return (

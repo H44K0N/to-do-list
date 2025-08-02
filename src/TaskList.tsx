@@ -18,8 +18,8 @@ export default function TaskList({
   setTasks: (tasks: Task[]) => void
 }) {
   const handleUpdate = (updatedTask: Task) => {
-    setTasks(prev =>
-      prev.map(task =>
+    setTasks((prev: Task[]) =>
+      prev.map((task: Task) =>
         task.id === updatedTask.id || task.tempId === updatedTask.tempId
           ? updatedTask
           : task
@@ -28,8 +28,8 @@ export default function TaskList({
   }
 
   const handleDelete = (id: string) => {
-    setTasks(prev =>
-      prev.filter(task => task.id !== id && task.tempId !== id)
+    setTasks((prev: Task[]) =>
+      prev.filter((task: Task) => task.id !== id && task.tempId !== id)
     )
   }
 

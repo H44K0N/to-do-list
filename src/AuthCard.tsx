@@ -16,9 +16,8 @@ export default function AuthCard() {
       setTimeout(() => setAnimateWave(false), 1000)
     }
 
-    trigger() // initial
+    trigger()
     const interval = setInterval(trigger, 8000)
-
     return () => clearInterval(interval)
   }, [])
 
@@ -27,20 +26,21 @@ export default function AuthCard() {
       scale: 1,
       textShadow: '0 0 0px #00c6ff',
     },
-    animate: (i: number) => ({
-      scale: [1, 1.1, 1],
-      textShadow: [
-        '0 0 0px #00c6ff',
-        '0 0 6px #00c6ff',
-        '0 0 0px #00c6ff',
-      ],
-      transition: {
-        delay: i * 0.02,
-        duration: 0.4,
-        ease: 'easeInOut',
-      },
-    }),
   }
+
+  const getAnimateVariant = (i: number) => ({
+    scale: [1, 1.1, 1],
+    textShadow: [
+      '0 0 0px #00c6ff',
+      '0 0 6px #00c6ff',
+      '0 0 0px #00c6ff',
+    ],
+    transition: {
+      delay: i * 0.02,
+      duration: 0.4,
+      ease: [0.42, 0, 0.58, 1],
+    },
+  })
 
   return (
     <div className={styles.wrapper}>
@@ -49,9 +49,9 @@ export default function AuthCard() {
           <motion.span
             key={i}
             custom={i}
-            variants={letterVariants}
             initial="initial"
-            animate={animateWave ? 'animate' : 'initial'}
+            animate={animateWave ? getAnimateVariant(i) : 'initial'}
+            variants={letterVariants}
             className={styles.letter}
           >
             {char}
