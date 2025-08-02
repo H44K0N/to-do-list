@@ -2,43 +2,45 @@ import { useState, useEffect } from 'react'
 import styles from './AuthCard.module.css'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 
 const title = 'Hypertask'
 
-const letterVariants: Variants = {
-  initial: {
-    scale: 1,
-    textShadow: '0 0 0px #00c6ff',
-  },
-  wave: {
-    scale: [1, 1.1, 1],
-    textShadow: [
-      '0 0 0px #00c6ff',
-      '0 0 6px #00c6ff',
-      '0 0 0px #00c6ff',
-    ],
-    transition: {
-      duration: 0.4,
-      ease: 'easeInOut',
-    },
-  },
-}
-
 export default function AuthCard() {
   const [isFlipped, setIsFlipped] = useState(false)
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [animateWave, setAnimateWave] = useState(false)
 
   useEffect(() => {
     const trigger = () => {
-      setActiveIndex(0)
+      setAnimateWave(true)
+      setTimeout(() => setAnimateWave(false), 1000)
     }
 
-    trigger() // initial wave
+    trigger()
     const interval = setInterval(trigger, 8000)
 
     return () => clearInterval(interval)
   }, [])
+
+  const letterVariants: Variants = {
+    initial: {
+      scale: 1,
+      textShadow: '0 0 0px #00c6ff',
+    },
+    animate: {
+      scale: [1, 1.1, 1],
+      textShadow: [
+        '0 0 0px #00c6ff',
+        '0 0 6px #00c6ff',
+        '0 0 0px #00c6ff',
+      ],
+      transition: {
+        duration: 0.4,
+        ease: [0.42, 0, 0.58, 1],
+      },
+    },
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -48,10 +50,8 @@ export default function AuthCard() {
             key={i}
             variants={letterVariants}
             initial="initial"
-            animate={activeIndex === i ? 'wave' : 'initial'}
-            onAnimationComplete={() => {
-              if (activeIndex === i) setActiveIndex(i + 1 < title.length ? i + 1 : null)
-            }}
+            animate={animateWave ? 'animate' : 'initial'}
+            transition={{ delay: i * 0.02 }}
             className={styles.letter}
           >
             {char}
@@ -71,3 +71,4 @@ export default function AuthCard() {
     </div>
   )
 }
+
